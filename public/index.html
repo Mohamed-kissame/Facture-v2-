@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configuration de Facture</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/icons.css">
+</head>
+<body>
+    <div class="container">
+        <div class="sidebar">
+            <!-- Single Component Menu Header -->
+            <div class="main-header">
+                <h2>Menu des Composants</h2>
+            </div>
+            
+            <!-- Component Menu Content -->
+            <div id="component-menu-container">
+                <!-- Component categories and items will be inserted here by JavaScript -->
+            </div>
+
+    <!-- Hidden form inputs for configuration -->
+    <div class="hidden-config">
+        <textarea id="company-details" style="display: none;"></textarea>
+        <textarea id="client-details" style="display: none;"></textarea>
+        <input type="text" id="invoice-number" style="display: none;">
+        <input type="date" id="invoice-date" style="display: none;">
+        <input type="date" id="due-date" style="display: none;">
+        <input type="number" id="tax-rate" value="15" style="display: none;">
+        <select id="font-select" style="display: none;">
+            <option value="Lato">Lato</option>
+            <option value="Helvetica">Helvetica</option>
+            <option value="Times New Roman">Times New Roman</option>
+            <option value="Courier New">Courier New</option>
+        </select>
+        <input type="color" id="primary-color" value="#000000" style="display: none;">
+        <input type="color" id="secondary-color" value="#000000" style="display: none;">
+        <input type="text" id="slogan-input" style="display: none;">
+        <input type="text" id="footer-number" style="display: none;">
+        <textarea id="payment-info" style="display: none;"></textarea>
+        
+        <!-- Hidden image upload boxes -->
+        <div id="logo-upload" class="image-upload-box" style="display: none;"></div>
+        <div id="signature-upload" class="image-upload-box" style="display: none;"></div>
+        <div id="header-image-upload" class="image-upload-box" style="display: none;"></div>
+        <div id="footer-image-upload" class="image-upload-box" style="display: none;"></div>
+        <div id="watermark-upload" class="image-upload-box" style="display: none;"></div>
+    </div>
+
+    <div class="button-group">
+        <button id="save-btn" class="btn btn-primary">Sauvegarder PDF</button>
+        <button id="cancel-btn" class="btn btn-secondary">Annuler</button>
+        <button id="close-btn" class="btn btn-secondary">Fermer</button>
+    </div>
+</div>
+
+        <div class="preview-area">
+            <div id="invoice-preview" class="invoice-preview empty">
+                <!-- Empty state message -->
+                <div id="empty-state" class="empty-state">
+                    <div class="empty-state-icon">📄</div>
+                    <h3>Votre facture est vide</h3>
+                    <p>Cliquez sur les composants à gauche pour commencer à construire votre facture</p>
+                </div>
+                
+                <!-- Component container for added components -->
+                <div id="invoice-components" class="invoice-components">
+                    <!-- Components will be added here dynamically -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Template for invoice items -->
+    <template id="invoice-item-template">
+        <div class="invoice-item">
+            <h4>Article <span class="item-number"></span></h4>
+            <div class="form-group">
+                <label>Description:</label>
+                <input type="text" class="item-description" placeholder="Description de l'article">
+            </div>
+            <div class="form-group">
+                <label>Détails:</label>
+                <input type="text" class="item-details" placeholder="Détails supplémentaires">
+            </div>
+            <div class="form-group">
+                <label>Quantité:</label>
+                <input type="number" class="item-quantity" value="1" min="0" step="0.001">
+            </div>
+            <div class="form-group">
+                <label>Prix unitaire:</label>
+                <input type="number" class="item-price" value="0" min="0" step="0.01">
+            </div>
+            <button type="button" class="btn btn-danger btn-remove-item">Supprimer</button>
+        </div>
+    </template>
+
+    <!-- Component Control Panel Template -->
+    <template id="component-control-template">
+        <div class="component-controls">
+            <div class="control-handle">⋮⋮</div>
+            <div class="control-buttons">
+                <button class="control-btn edit-btn" title="Modifier">✏️</button>
+                <button class="control-btn remove-btn" title="Supprimer">🗑️</button>
+            </div>
+        </div>
+    </template>
+
+    <!-- Load JavaScript files in the correct order -->
+    <script type="module" src="js/models/InvoiceModel.js"></script>
+    <script type="module" src="js/views/InvoiceView.js"></script>
+    <script type="module" src="js/views/ComponentMenuView.js"></script>
+    <script type="module" src="js/services/ImageManager.js"></script>
+    <script type="module" src="js/services/PositionManager.js"></script>
+    <script type="module" src="js/services/ComponentLibraryService.js"></script>
+    <script type="module" src="js/controllers/InvoiceController.js"></script>
+    <script type="module" src="js/app.js"></script>
+</body>
+</html>
